@@ -1,4 +1,15 @@
 
+##
+## Dockerfile to build a small web service with polyglot
+## to detect the language of some text
+##
+
+## -- build & run --
+## $ docker build   -t detect:0.1
+## $ docker run --name detect --rm -d -p 5000:5000 detect:0.1
+## then point your browser to http://localhost:5000/
+## (if running on your local computer)
+
 #-- get os and update
 FROM ubuntu:18.04 as base
 RUN apt-get update      \
@@ -31,6 +42,7 @@ RUN  python3 -m pip  install  -U git+https://github.com/aboSamoor/polyglot.git@m
 WORKDIR   /flask
 COPY *.py /flask/
 
+#-- start web service on port 5000
 EXPOSE 5000
 CMD uwsgi --socket 0.0.0.0:5000 --protocol=http --uid wsgi -w wsgi:app
 

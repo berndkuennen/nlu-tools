@@ -1,4 +1,9 @@
 
+#
+# small example wsgi app for detecting language wit polyglot
+#
+
+
 from  flask import Flask
 app = Flask(__name__)
 
