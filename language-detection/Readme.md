@@ -1,24 +1,23 @@
 # Language detection with polyglot
 
-This is a small example webapp which uses polyglot to detect
-the language of some given text. 
+This is a small example webapp which uses polyglot to detect the language of some given text. 
 
 ## Polyglot
 Polyglot is a natural language pipeline that supports massive multilingual applications.
 It's able to detect 196 different languages and furthermore supports such things like 
 tokenization, entity recognition, sentiment analysis and many more.
 
-In this little proof of concept it's used to build a small web service which detects
+In this little proof of concept, it's used to build a small web service which detects
 the language of some given text. The web application contains a standard web form
 for interactive testing and of course a REST interface which returns a json record
 (see example below).
 
 ## Example usage
-Of the REST interface at /detect/json:
+Send a request to the REST interface at /detect/json like this:
 ```
 $ curl -X POST -H "Content-Type: application/json"  -d '{"text": "For a fews dollars more"}'  http://localhost:5000/detect/json
 ```
-Result:
+Result looks like this:
 ```
 {
   "count":3,
