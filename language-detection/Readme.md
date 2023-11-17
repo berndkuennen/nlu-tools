@@ -15,14 +15,14 @@ for interactive testing and of course a REST interface which returns a json reco
 ## Example usage
 Send a request to the REST interface at /detect/json like this:
 ```
-$ curl -X POST -H "Content-Type: application/json"  -d '{"text": "For a fews dollars more"}'  http://localhost:5000/detect/json
+curl -X POST -H "Content-Type: application/json"  -d '{"text": "Alea iacta est."}'  http://localhost:5000/detect/json 
 ```
 Result looks like this:
 ```
 {
   "count":3,
   "records":[
-    {"code":"en","confidence":99.0,"name":"English","read bytes":1666},
+    {"code":"la","confidence":93.0,"name":"Latin","read bytes":1092},
     {"code":"un","confidence":0.0,"name":"un","read bytes":0},
     {"code":"un","confidence":0.0,"name":"un","read bytes":0}
   ],
@@ -30,6 +30,17 @@ Result looks like this:
 }
 ```
 
+## Dockerfile
+Use the dockerfile to build and run a container with the webapp.
+
+```
+# Build the image
+docker build -f Dockerfile  -t language-detector:poc .
+
+# Run the image
+docker run --rm --detach -p 5000:5000 language-detector:poc
+```
+Now point your browser to http://localhost:5000/detect/form and enter some text in any language.
 
 ## Links
 * [Polyglot documentation](https://polyglot.readthedocs.io/en/latest/index.html)

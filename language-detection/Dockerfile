@@ -5,35 +5,31 @@
 ##
 
 ## -- build & run --
-## $ docker build   -t detect:0.1
-## $ docker run --name detect --rm -d -p 5000:5000 detect:0.1
+## $ docker build -f Dockerfile  -t language-detector:poc .
+## $ docker run --rm --detach -p 5000:5000 language-detector:poc
 ## then point your browser to http://localhost:5000/
 ## (if running on your local computer)
 
 #-- get os and update
-FROM ubuntu:18.04 as base
-RUN apt-get update      \
- && apt-get upgrade -y  \
- && apt-get install -y  software-properties-common  curl
+FROM ubuntu:latest as base
+RUN apt-get update         \
+ && apt-get upgrade -y  
 
 #-- install python, then clean up
 FROM base as python3
-RUN apt-get install python3 python3-pip -y && \
-    apt-get clean &&\
-    rm -rf /var/lib/apt/lists/*
+RUN  apt-get install python3-pip -y  \
+ &&  apt-get clean
 
 #-- create wsgi web server 
 FROM python3 as wsgi
-RUN  python3 -m pip install uwsgi flask
-RUN  groupadd wsgi \
+RUN  python3 -m pip install uwsgi flask  \
+ &&  groupadd wsgi                       \
  &&  useradd -g wsgi -s /bin/sh wsgi
 
-#-- first install libicu (uses https sources) and git client, plus numpy
+#-- first install icu and git client, plus some python tools
 FROM wsgi
-RUN  apt-get -y install apt-transport-https     \
- &&  apt-get update                             \
- &&  apt-get -y install libicu-dev git          \
- &&  python3 -m pip  install numpy
+RUN  apt-get -y install python3-icu git         \
+ &&  pip install -U numpy setuptools
 
 # polyglot can't be installed via pip in 16.7.4
 # see: https://github.com/aboSamoor/polyglot/issues/100
