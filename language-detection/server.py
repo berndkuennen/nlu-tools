@@ -18,7 +18,9 @@ def hello():
 
   <p>
   This is a small demo how to detect the language of
-  a text with the nlu tool polyglot. The small web app
+  a text with the nlu tool polyglot, based on
+  the project <a href="https://github.com/aboSamoor/polyglot.git">aboSamoor/polyglot</a>.
+  The small web app
   has a REST interface at /detect/json and a simple
   web form at <a href="/detect/form">/detect/form</a>.
   </p>

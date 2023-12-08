@@ -59,7 +59,7 @@ def generate_html(frm,res):
 		<h1>Detect the language of text</h1>
 		<p>Enter some text in any language:</p>
 	  	<form method="POST" id="detect" action="/detect/form">
-		  <textarea id="text" name="text" cols="50" rows="10">""" + frm + """</textarea><br/>
+		  <textarea id="text" name="text" cols="50" rows="10">""" + frm + """</textarea><br/><br/>
 		  <input type="submit" value="Submit">
 		</form>
 	  <p>""" + insert_txt + """</p>

@@ -10,14 +10,11 @@
 ## then point your browser to http://localhost:5000/
 ## (if running on your local computer)
 
-#-- get os and update
-FROM ubuntu:latest as base
-RUN apt-get update         \
- && apt-get upgrade -y  
-
-#-- install python, then clean up
-FROM base as python3
-RUN  apt-get install python3-pip -y  \
+#-- get os and update, install python, then clean up
+FROM ubuntu:latest as python3
+RUN  apt-get update			\
+ &&  apt-get upgrade -y			\  
+ &&  apt-get -y install python3-pip	\
  &&  apt-get clean
 
 #-- create wsgi web server 
